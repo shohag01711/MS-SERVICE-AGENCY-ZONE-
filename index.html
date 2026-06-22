@@ -159,6 +159,186 @@
         </ul>
     </div>
 
+    <button id="payButton" class="pay-btn">এখনই পেমেন্ট করুন (bKash/Nagad)</button>
+
+    <div class="secure-text">
+        🔒 Secured by Zinipay Payment Gateway
+    </div>
+</div>
+
+<script>
+    document.getElementById('payButton').addEventListener('click', async function() {
+        const btn = this;
+        btn.disabled = true;
+        btn.innerText = "অপেক্ষা করুন...";
+
+        // আপনার আসল টেলিগ্রাম প্রিমিয়াম চ্যানেল লিংক
+        const successUrl = "https://t.me/+UHQZz8FGkL1hN2M1"; 
+        // ক্যানসেল বা ফেইল করলে কাস্টমার এই পেজেই ফিরে আসবে
+        const cancelUrl = window.location.href; 
+
+        try {
+            const response = await fetch('https://api.zinipay.com/v1/payment/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'zini-api-key': 'E5e6a04761130ac551d5cceffdf63cc477d6bf585ae5ba25' // আপনার আসল লাইভ এপিআই কি
+                },
+                body: JSON.stringify({
+                    amount: 500,
+                    currency: "BDT",
+                    success_url: successUrl,
+                    cancel_url: cancelUrl,
+                    order_id: "PREMIUM_" + Date.now()
+                })
+            });
+
+            const data = await response.json();
+
+            if (data && data.payment_url) {
+                window.location.href = data.payment_url;
+            } else if (data && data.url) {
+                window.location.href = data.url;
+            } else {
+                alert("পেমেন্ট গেটওয়ে লোড করতে समस्या হয়েছে। দয়া করে আবার চেষ্টা করুন বা অ্যাডমিনের সাথে যোগাযোগ করুন।");
+                btn.disabled = false;
+                btn.innerText = "এখনই পেমেন্ট করুন (bKash/Nagad)";
+            }
+        } catch (error) {
+            console.error("Error initiating payment:", error);
+            alert("নেটওয়ার্ক ত্রুটি! আবার চেষ্টা করুন।");
+            btn.disabled = false;
+            btn.innerText = "এখনই পেমেন্ট করুন (bKash/Nagad)";
+        }
+    });
+</script>
+
+</body>
+</html>        }
+
+        .badge {
+            background-color: #ef4444;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .description {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .price-tag {
+            background: rgba(255, 204, 0, 0.1);
+            border: 2px dashed var(--primary-color);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .features {
+            text-align: left;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+        }
+
+        .features ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #cbd5e1;
+        }
+
+        .features li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .pay-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #ffcc00, #ffa500);
+            color: #000;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+        }
+
+        .pay-btn:disabled {
+            background: #475569;
+            color: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .secure-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="badge">সীমিত সময়ের জন্য অফার!</div>
+    <h1>প্রিমিয়াম চ্যানেল লাইফটাইম অ্যাক্সেস</h1>
+    
+    <p class="description">
+        আমাদের প্রিমিয়াম চ্যানেলে ২০২০ এর পর থেকে যত কালেকশন ভাইরাল হয়েছে সব পাবেন! 
+        চ্যানেলে ৩০ হাজারেরও বেশি এক্সক্লুসিভ কালেকশন দেওয়া আছে।<br>
+        <span style="font-style: italic; color: #cbd5e1;">Her full collections are now available in our premium channel. Join to see more.</span>
+    </p>
+
+    <div class="price-tag">
+        500 TK <span style="font-size: 14px; color: var(--text-muted); font-weight: normal;">/ Lifetime</span>
+    </div>
+
+    <div class="features">
+        <ul>
+            <li>Instant অ্যাক্সেস (পেমেন্ট করার সাথে সাথেই লিংক)</li>
+            <li>বিকাশ, নগদ, রকেটের মাধ্যমে পেমেন্ট করার সুবিধা</li>
+            <li>১০০% নিরাপদ ও স্বয়ংক্রিয় পেমেন্ট সিস্টেম</li>
+        </ul>
+    </div>
+
     <!-- Payment Button -->
     <button id="payButton" class="pay-btn">এখনই পেমেন্ট করুন (bKash/Nagad)</button>
 
