@@ -1,9 +1,19 @@
+<style>
+    /* ব্লগারের নিজস্ব হেডার, ফুটার এবং সাইডবার সম্পূর্ণ হাইড করার জন্য */
+    #header-wrapper, .sidebar-wrapper, #footer-wrapper, .post-footer, #header, .navbar, .main-wrapper { display:none !important; }
+    .error-msg { color: #ef4444; font-size: 14px; margin-top: 10px; display: none; }
+</style>
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Channel Lifetime Access</title>
+    
+    <!-- জিনীপে-র অফিশিয়াল জাভাস্ক্রিপ্ট লাইব্রেরি (যা আপনার জিপ ফাইলে ছিল) -->
+    <script src="https://api.zinipay.com/v1/zinipay.js"></script>
+
     <style>
         :root {
             --primary-color: #ffcc00;
@@ -139,6 +149,78 @@
 
 <div class="container">
     <div class="badge">সীমিত সময়ের জন্য অফার!</div>
+    <h1>প্রিমিয়াম চ্যানেল লাইফটাইম অ্যাক্সেস</h1>
+    
+    <p class="description">
+        আমাদের প্রিমিয়াম চ্যানেলে ২০২০ এর পর থেকে যত কালেকশন ভাইরাল হয়েছে সব পাবেন! 
+        চ্যানেলে ৩০ হাজারেরও বেশি এক্সক্লুসিভ কালেকশন দেওয়া আছে।<br>
+        <span style="font-style: italic; color: #cbd5e1;">Her full collections are now available in our premium channel. Join to see more.</span>
+    </p>
+
+    <div class="price-tag">
+        500 TK <span style="font-size: 14px; color: var(--text-muted); font-weight: normal;">/ Lifetime</span>
+    </div>
+
+    <div class="features">
+        <ul>
+            <li>Instant অ্যাক্সেস (পেমেন্ট করার সাথে সাথেই লিংক)</li>
+            <li>বিকাশ, নগদ, রকেটের মাধ্যমে পেমেন্ট করার সুবিধা</li>
+            <li>১০০% নিরাপদ ও স্বয়ংক্রিয় পেমেন্ট সিস্টেম</li>
+        </ul>
+    </div>
+
+    <!-- পেমেন্ট বাটন -->
+    <button id="payButton" class="pay-btn">Loading...</button>
+    <div id="errorDisplay" class="error-msg"></div>
+
+    <div class="secure-text">
+        🔒 Secured by Zinipay Payment Gateway
+    </div>
+</div>
+
+<script>
+    // বাটনের টেক্সট সেট করা
+    const mainBtn = document.getElementById('payButton');
+    mainBtn.innerText = "এখনই পেমেন্ট করুন (bKash/Nagad)";
+
+    mainBtn.addEventListener('click', function() {
+        const btn = this;
+        const errorDisplay = document.getElementById('errorDisplay');
+        
+        btn.disabled = true;
+        btn.innerText = "Processing...";
+        errorDisplay.style.display = "none";
+
+        // জিনীপে অফিশিয়াল জাভাস্ক্রিপ্ট মেথড কলিং
+        Zinipay.createPayment({
+            apiKey: "0f808013f5164dd1ffe9fb593d76b8c90038dab35efdb00c",
+            amount: 500,
+            currency: "BDT",
+            success_url: "https://t.me/+UHQZz8FGkL1hN2M1",
+            cancel_url: window.location.href,
+            order_id: "PREMIUM_" + Date.now(),
+            customer: {
+                name: "Premium Customer",
+                email: "customer@m-girlspro.com",
+                phone: "01700000000"
+            },
+            onSuccess: function(data) {
+                if(data && data.payment_url) {
+                    window.location.href = data.payment_url;
+                }
+            },
+            onError: function(error) {
+                errorDisplay.innerText = "Gateway Error: " + (error.message || "Payment initiation failed.");
+                errorDisplay.style.display = "block";
+                btn.disabled = false;
+                btn.innerText = "এখনই পেমেন্ট করুন (bKash/Nagad)";
+            }
+        });
+    });
+</script>
+
+</body>
+        </html>    <div class="badge">সীমিত সময়ের জন্য অফার!</div>
     <h1>প্রিমিয়াম চ্যানেল লাইফটাইম অ্যাক্সেস</h1>
     
     <p class="description">
